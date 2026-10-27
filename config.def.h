@@ -909,7 +909,8 @@ static const char *dmenucmd[] = {
 	#endif // BAR_DMENUMATCHTOP_PATCH
 	NULL
 };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "kitty", NULL };
+static const char *trayercmd[]  = { "/home/sy/.local/bin/scripts/trayer", NULL };
 
 #if BAR_STATUSCMD_PATCH
 #if BAR_DWMBLOCKS_PATCH
@@ -1046,8 +1047,9 @@ static const Key keys[] = {
 	#if KEYMODES_PATCH
 	{ MODKEY,                       XK_Escape,     setkeymode,             {.ui = COMMANDMODE} },
 	#endif // KEYMODES_PATCH
-	{ MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return,     spawn,                  {.v = termcmd } },
+	/* { MODKEY,                       XK_d,          spawn,                  {.v = dmenucmd } }, */
+	{ MODKEY,                       XK_Return,     spawn,                  {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_t,          spawn,                  {.v = trayercmd } },
 	#if RIODRAW_PATCH
 	{ MODKEY|ControlMask,           XK_p,          riospawnsync,           {.v = dmenucmd } },
 	{ MODKEY|ControlMask,           XK_Return,     riospawn,               {.v = termcmd } },
@@ -1089,8 +1091,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_v,          switchcol,              {0} },
 	#endif // SWITCHCOL_PATCH
 	#if ROTATESTACK_PATCH
-	{ MODKEY|Mod4Mask,              XK_j,          rotatestack,            {.i = +1 } },
-	{ MODKEY|Mod4Mask,              XK_k,          rotatestack,            {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_j,          rotatestack,            {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_k,          rotatestack,            {.i = -1 } },
 	#endif // ROTATESTACK_PATCH
 	#if INPLACEROTATE_PATCH
 	{ MODKEY|Mod4Mask,              XK_j,          inplacerotate,          {.i = +2 } }, // same as rotatestack
@@ -1103,7 +1105,7 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_k,          pushup,                 {0} },
 	#endif // PUSH_PATCH / PUSH_NO_MASTER_PATCH
 	{ MODKEY,                       XK_i,          incnmaster,             {.i = +1 } },
-	{ MODKEY,                       XK_d,          incnmaster,             {.i = -1 } },
+	{ MODKEY,                       XK_u,          incnmaster,             {.i = -1 } },
 	#if FLEXTILE_DELUXE_LAYOUT
 	{ MODKEY|ControlMask,           XK_i,          incnstack,              {.i = +1 } },
 	{ MODKEY|ControlMask,           XK_u,          incnstack,              {.i = -1 } },
@@ -1148,7 +1150,7 @@ static const Key keys[] = {
 	#if INSETS_PATCH
 	{ MODKEY|ShiftMask|ControlMask, XK_a,          updateinset,            {.v = &default_inset } },
 	#endif // INSETS_PATCH
-	{ MODKEY,                       XK_Return,     zoom,                   {0} },
+	{ MODKEY|ShiftMask,             XK_Return,     zoom,                   {0} },
 	#if VANITYGAPS_PATCH
 	{ MODKEY|Mod4Mask,              XK_u,          incrgaps,               {.i = +1 } },
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_u,          incrgaps,               {.i = -1 } },
@@ -1202,14 +1204,14 @@ static const Key keys[] = {
 	{ MODKEY|Mod1Mask,              XK_j,          focusstack,             {.i = +2 } }, // The +/-2 allows focusstack to also focus on hidden
 	{ MODKEY|Mod1Mask,              XK_k,          focusstack,             {.i = -2 } }, // i.e. minimized clients.
 	#endif // BAR_WINTITLEACTIONS_PATCH
-	{ MODKEY|ShiftMask,             XK_c,          killclient,             {0} },
+	{ MODKEY,                       XK_q,          killclient,             {0} },
 	#if KILLUNSEL_PATCH
 	{ MODKEY|ShiftMask,             XK_x,          killunsel,              {0} },
 	#endif // KILLUNSEL_PATCH
 	#if SELFRESTART_PATCH
 	{ MODKEY|ShiftMask,             XK_r,          self_restart,           {0} },
 	#endif // SELFRESTART_PATCH
-	{ MODKEY|ShiftMask,             XK_q,          quit,                   {0} },
+	{ MODKEY|ShiftMask,             XK_e,          quit,                   {0} },
 	#if RESTARTSIG_PATCH
 	{ MODKEY|ControlMask|ShiftMask, XK_q,          quit,                   {1} },
 	#endif // RESTARTSIG_PATCH
@@ -1262,7 +1264,7 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_grave,      setscratch,             {.v = scratchpadcmd } },
 	{ MODKEY|ShiftMask,             XK_grave,      removescratch,          {.v = scratchpadcmd } },
 	#elif SCRATCHPADS_PATCH
-	{ MODKEY,                       XK_grave,      togglescratch,          {.ui = 0 } },
+	{ MODKEY,                       XK_s,          togglescratch,          {.ui = 0 } },
 	{ MODKEY|ControlMask,           XK_grave,      setscratch,             {.ui = 0 } },
 	{ MODKEY|ShiftMask,             XK_grave,      removescratch,          {.ui = 0 } },
 	#endif // SCRATCHPADS_PATCH | RENAMED_SCRATCHPADS_PATCH
