@@ -36,6 +36,7 @@ endif
 clean:
 	rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz
 	rm -f dwm-msg
+	rm -rf config.h patches.h
 
 dist: clean
 	mkdir -p dwm-${VERSION}
@@ -45,9 +46,9 @@ dist: clean
 	gzip dwm-${VERSION}.tar
 	rm -rf dwm-${VERSION}
 
-install: all
+install: clean all
 	mkdir -p ${DESTDIR}${PREFIX}/bin
-	cp -f dwm ${DESTDIR}${PREFIX}/bin
+	mv -f dwm ${DESTDIR}${PREFIX}/bin
 ifdef YAJLLIBS
 	cp -f dwm-msg ${DESTDIR}${PREFIX}/bin
 endif
